@@ -70,11 +70,19 @@ int isIndexWithinBounds(int i, int len) {
 void processSoundex(const char *name, char *soundex, int *sIndex, int len) {
     int i = 1;  // Start from the second character of the input
 
-    // Process characters until Soundex code is complete or end of the name
-    while (isIndexWithinBounds(i, len) && !isSoundexComplete(*sIndex)) {  // Two conditions now
+    // Store results of conditions in variables
+    int indexInBounds = isIndexWithinBounds(i, len);
+    int soundexNotComplete = !isSoundexComplete(*sIndex);
+
+    // Loop until the index is within bounds and Soundex code is not complete
+    while (indexInBounds && soundexNotComplete) {
         char code = getSoundexCode(name[i]);
         addToSoundex(soundex, code, sIndex);  // Add valid code to Soundex
         i++;  // Increment index
+
+        // Update condition variables after incrementing index
+        indexInBounds = isIndexWithinBounds(i, len);
+        soundexNotComplete = !isSoundexComplete(*sIndex);
     }
 }
 
