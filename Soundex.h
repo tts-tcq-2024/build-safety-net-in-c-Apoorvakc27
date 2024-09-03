@@ -13,11 +13,6 @@ char soundexMap[26] = {
 };
 
 // Function to get Soundex code from the lookup table
-/*
-char getSoundexCode(char c) {
-    c = toupper(c);
-    return (c >= 'A' && c <= 'Z') ? soundexMap[c - 'A'] : '0';
-}*/
 char getSoundexCode(char c) {
     c = toupper(c);
     if (c >= 'A' && c <= 'Z') {
