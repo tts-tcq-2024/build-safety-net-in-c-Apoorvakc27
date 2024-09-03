@@ -46,7 +46,11 @@ void generateSoundex(const char *name, char *soundex) {
     
     initializeSoundex(name, soundex, &sIndex);  // Initialize Soundex with first character
 
-    for (int i = 1; i < len && sIndex < 4; i++) {
+    for (int i = 1; i < len; i++) {  // Iterate over the input string starting from the second character
+        if (sIndex >= 4) {  // If Soundex code reaches the required length, exit early
+            break;
+        }
+
         char code = getSoundexCode(name[i]);
         addToSoundex(soundex, code, &sIndex);  // Add valid code to Soundex
     }
