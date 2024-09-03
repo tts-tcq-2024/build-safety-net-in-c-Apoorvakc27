@@ -56,19 +56,14 @@ void padSoundex(char *soundex, int *sIndex) {
     soundex[4] = '\0';  // Null-terminate the Soundex code
 }
 
-// Helper function to process a single character and update Soundex
-void processCharacter(const char *name, int *i, int len, int *sIndex, char *soundex) {
-    if (*i < len) {  // Single decision point for processing a character
-        char code = getSoundexCode(name[*i]);
-        addToSoundex(soundex, code, sIndex);  // Add valid code to Soundex
-        (*i)++;  // Increment index
-    }
-}
+// Function to process characters and generate Soundex code
+void processSoundex(const char *name, char *soundex, int *sIndex, int len) {
+    int i = 1;  // Start from the second character of the input
 
-// Helper function to ensure Soundex code is of length 4
-void ensureSoundexLength(char *soundex, int *sIndex) {
-    while (*sIndex < 4) {  // Loop until Soundex code reaches the required length
-        padSoundex(soundex, sIndex);  // Pad with '0's to make it of length 4
+    while (i < len && *sIndex < 4) {  // Loop until end of name or Soundex is complete
+        char code = getSoundexCode(name[i]);
+        addToSoundex(soundex, code, sIndex);  // Add valid code to Soundex
+        i++;  // Increment index
     }
 }
 
@@ -77,21 +72,11 @@ void generateSoundex(const char *name, char *soundex) {
     int len = strlen(name);
     int sIndex = 0;  // Index to keep track of Soundex code position
 
-    initializeSoundex(name, soundex, &sIndex);  // Initialize Soundex with first character
+    initializeSoundex(name, soundex, &sIndex);  // Initialize Soundex with the first character
 
-    int i = 1;  // Start from the second character of the input
+    processSoundex(name, soundex, &sIndex, len);  // Process the characters and generate Soundex code
 
-    // First loop: Process characters until the end of the name
-    while (i < len) {  // Loop until end of name
-        if (sIndex >= 4) {  // Check if Soundex is complete
-            break;  // Exit the loop if Soundex code has reached the required length
-        }
-        processCharacter(name, &i, len, &sIndex, soundex);  // Process each character
-    }
-
-    // Call the new function to ensure the length of Soundex code
-    ensureSoundexLength(soundex, &sIndex);
+    padSoundex(soundex, &sIndex);  // Pad with '0's to make it of length 4
 }
-
 
 #endif // SOUNDEX_H
