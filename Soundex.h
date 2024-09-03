@@ -1,7 +1,7 @@
 #ifndef SOUNDEX_H
 #define SOUNDEX_H
 
-
+#include "Soundex.h"
 #include <ctype.h>
 #include <string.h>
 
@@ -53,3 +53,5 @@ void generateSoundex(const char *name, char *soundex) {
 
     padSoundex(soundex, &sIndex);  // Pad with '0's to make it of length 4
 }
+
+#endif // SOUNDEX_H
