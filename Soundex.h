@@ -55,7 +55,6 @@ void padSoundex(char *soundex, int *sIndex) {
     }
     soundex[4] = '\0';  // Null-terminate the Soundex code
 }
-
 // Helper function to check if Soundex code length is sufficient
 int isSoundexComplete(int sIndex) {
     return sIndex >= 4;
@@ -66,25 +65,22 @@ int isIndexWithinBounds(int i, int len) {
     return i < len;
 }
 
+// Function to check if conditions for loop continuation are met
+int canContinueProcessing(const char *name, int i, int len, int *sIndex) {
+    return isIndexWithinBounds(i, len) && !isSoundexComplete(*sIndex);
+}
+
 // Function to process characters and generate Soundex code
 void processSoundex(const char *name, char *soundex, int *sIndex, int len) {
     int i = 1;  // Start from the second character of the input
 
-    // Store results of conditions in variables
-    int indexInBounds = isIndexWithinBounds(i, len);
-    int soundexNotComplete = !isSoundexComplete(*sIndex);
-
-    // Loop until the index is within bounds and Soundex code is not complete
-    while (indexInBounds && soundexNotComplete) {
+    while (canContinueProcessing(name, i, len, sIndex)) {
         char code = getSoundexCode(name[i]);
         addToSoundex(soundex, code, sIndex);  // Add valid code to Soundex
         i++;  // Increment index
-
-        // Update condition variables after incrementing index
-        indexInBounds = isIndexWithinBounds(i, len);
-        soundexNotComplete = !isSoundexComplete(*sIndex);
     }
 }
+
 
 // Function to generate the Soundex code
 void generateSoundex(const char *name, char *soundex) {
