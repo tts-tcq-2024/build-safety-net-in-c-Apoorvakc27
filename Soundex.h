@@ -65,6 +65,13 @@ void processCharacter(const char *name, int *i, int len, int *sIndex, char *soun
     }
 }
 
+// Helper function to ensure Soundex code is of length 4
+void ensureSoundexLength(char *soundex, int *sIndex) {
+    while (*sIndex < 4) {  // Loop until Soundex code reaches the required length
+        padSoundex(soundex, sIndex);  // Pad with '0's to make it of length 4
+    }
+}
+
 // Function to generate the Soundex code
 void generateSoundex(const char *name, char *soundex) {
     int len = strlen(name);
@@ -73,11 +80,18 @@ void generateSoundex(const char *name, char *soundex) {
     initializeSoundex(name, soundex, &sIndex);  // Initialize Soundex with first character
 
     int i = 1;  // Start from the second character of the input
-    while (i < len && sIndex < 4) {  // Loop until end of name or Soundex is complete
+
+    // First loop: Process characters until the end of the name
+    while (i < len) {  // Loop until end of name
+        if (sIndex >= 4) {  // Check if Soundex is complete
+            break;  // Exit the loop if Soundex code has reached the required length
+        }
         processCharacter(name, &i, len, &sIndex, soundex);  // Process each character
     }
 
-    padSoundex(soundex, &sIndex);  // Pad with '0's to make it of length 4
+    // Call the new function to ensure the length of Soundex code
+    ensureSoundexLength(soundex, &sIndex);
 }
+
 
 #endif // SOUNDEX_H
