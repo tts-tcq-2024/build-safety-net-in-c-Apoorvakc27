@@ -56,9 +56,13 @@ void padSoundex(char *soundex, int *sIndex) {
     soundex[4] = '\0';  // Null-terminate the Soundex code
 }
 
-// Helper function to check if the Soundex code is complete
-int isSoundexComplete(int sIndex) {
-    return sIndex >= 4;
+// Helper function to process a single character and update Soundex
+void processCharacter(const char *name, int *i, int len, int *sIndex, char *soundex) {
+    if (*i < len) {  // Single decision point for processing a character
+        char code = getSoundexCode(name[*i]);
+        addToSoundex(soundex, code, sIndex);  // Add valid code to Soundex
+        (*i)++;  // Increment index
+    }
 }
 
 // Function to generate the Soundex code
@@ -69,10 +73,8 @@ void generateSoundex(const char *name, char *soundex) {
     initializeSoundex(name, soundex, &sIndex);  // Initialize Soundex with first character
 
     int i = 1;  // Start from the second character of the input
-    while (i < len && !isSoundexComplete(sIndex)) {  // Combine loop conditions using a helper function
-        char code = getSoundexCode(name[i]);
-        addToSoundex(soundex, code, &sIndex);  // Add valid code to Soundex
-        i++;  // Increment index
+    while (i < len && sIndex < 4) {  // Loop until end of name or Soundex is complete
+        processCharacter(name, &i, len, &sIndex, soundex);  // Process each character
     }
 
     padSoundex(soundex, &sIndex);  // Pad with '0's to make it of length 4
