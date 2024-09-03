@@ -13,14 +13,27 @@ char soundexMap[26] = {
 };
 
 // Function to get Soundex code from the lookup table
+/*
 char getSoundexCode(char c) {
     c = toupper(c);
     return (c >= 'A' && c <= 'Z') ? soundexMap[c - 'A'] : '0';
+}*/
+char getSoundexCode(char c) {
+    c = toupper(c);
+    if (c >= 'A' && c <= 'Z') {
+        return soundexMap[c - 'A'];  // Return mapped code from lookup table
+    }
+    return '0'; // For non-alphabet characters
 }
+
 
 // Helper function to add a character to the Soundex code, if valid
 void addToSoundex(char *soundex, char code, int *sIndex) {
-    if (code != '0' && code != soundex[*sIndex - 1]) {
+    if (code == '0') {  // Guard clause to reduce nested condition
+        return;
+    }
+    // Only one condition remains to be checked now
+    if (code != soundex[*sIndex - 1]) {
         soundex[(*sIndex)++] = code;
     }
 }
@@ -43,16 +56,14 @@ void padSoundex(char *soundex, int *sIndex) {
 void generateSoundex(const char *name, char *soundex) {
     int len = strlen(name);
     int sIndex = 0;  // Index to keep track of Soundex code position
-    
+
     initializeSoundex(name, soundex, &sIndex);  // Initialize Soundex with first character
 
-    for (int i = 1; i < len; i++) {  // Iterate over the input string starting from the second character
-        if (sIndex >= 4) {  // If Soundex code reaches the required length, exit early
-            break;
-        }
-
+    int i = 1;  // Start from the second character of the input
+    while (i < len && sIndex < 4) {  // Combine loop conditions to reduce CCN
         char code = getSoundexCode(name[i]);
         addToSoundex(soundex, code, &sIndex);  // Add valid code to Soundex
+        i++;  // Increment index
     }
 
     padSoundex(soundex, &sIndex);  // Pad with '0's to make it of length 4
