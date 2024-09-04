@@ -44,7 +44,7 @@ TEST(SoudexTestsuite, SpecialCharactersWithDigits) {
 TEST(SoudexTestsuite, LastCharacters) {
   char soundex[5];
   generateSoundex("zXPMZjS", soundex);
-  EXPECT_STREQ(soundex,"Z212");
+  EXPECT_STREQ(soundex,"Z215");
   
 }
 TEST(SoudexTestsuite, SameCharactersRepeating) {
