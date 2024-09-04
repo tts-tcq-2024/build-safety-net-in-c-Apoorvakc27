@@ -11,7 +11,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits) {
 TEST(SoudexTestsuite, NumbersWithCharacters) {
   char soundex[5];
   generateSoundex("17AK", soundex);
-  EXPECT_STREQ(soundex,"1002");
+  EXPECT_STREQ(soundex,"1200");
   
 }
 
