@@ -4,94 +4,94 @@
 #include <ctype.h>
 #include <string.h>
 
-// Lookup table for Soundex codes for 'A' to 'Z'.
+/* Lookup table for Soundex codes for 'A' to 'Z' */
 char soundexMap[26] = {
     '0', '1', '2', '3', '0', '1', '2', '0', '0', '2', // A-J
     '2', '4', '5', '5', '0', '1', '2', '6', '2', '3', // K-T
     '0', '1', '0', '2', '0', '2'                      // U-Z
 };
 
-// Helper function to check if a character is an uppercase letter
+/* Supporting function to check if a character is an uppercase letter */
 int isUpperCaseLetter(char c) {
     return c >= 'A' && c <= 'Z';
 }
 
-// Helper function to convert character to uppercase
+/* Supporting function to convert character to uppercase */
 char toUpperCase(char c) {
     return toupper(c);
 }
 
-// Function to get Soundex code from the lookup table
+/*  Function to get Soundex code from the lookup table */
 char getSoundexCode(char c) {
     c = toUpperCase(c);
     if (isUpperCaseLetter(c)) {
-        return soundexMap[c - 'A'];  // Return mapped code from lookup table
+        return soundexMap[c - 'A'];  
     }
-    return '0'; // For non-alphabet characters
+    return '0'; 
 }
 
-// Helper function to check if the code is valid to add
+/* Supporting function to check if the code is valid to add */
 int isValidCode(char code, char previousCode) {
     return code != '0' && code != previousCode;
 }
 
-// Helper function to add a character to the Soundex code, if valid
+/* Supporting function to add a character to the Soundex code, if valid */
 void addToSoundex(char *soundex, char code, int *sIndex) {
     if (isValidCode(code, soundex[*sIndex - 1])) {
         soundex[(*sIndex)++] = code;
     }
 }
 
-// Helper function to initialize Soundex code
+/* Supporting function to initialize Soundex code */
 void initializeSoundex(const char *name, char *soundex, int *sIndex) {
-    soundex[0] = toUpperCase(name[0]);  // Start with the first letter capitalized
-    *sIndex = 1;  // Initialize the index to the second character
+    soundex[0] = toUpperCase(name[0]);  
+    *sIndex = 1;  /* Initialize the index to the second character */
 }
 
-// Helper function to pad remaining characters with '0'
+/* Supporting function to pad remaining characters with '0' */
 void padSoundex(char *soundex, int *sIndex) {
     while (*sIndex < 4) {
         soundex[(*sIndex)++] = '0';
     }
-    soundex[4] = '\0';  // Null-terminate the Soundex code
+    soundex[4] = '\0'; 
 }
-// Helper function to check if Soundex code length is sufficient
+/* Supporting function to check if Soundex code length is sufficient */
 int isSoundexComplete(int sIndex) {
     return sIndex >= 4;
 }
 
-// Helper function to check if index is within bounds
+/* Supporting function to check if index is within bounds */
 int isIndexWithinBounds(int i, int len) {
     return i < len;
 }
 
-// Function to check if conditions for loop continuation are met
+/* Function to check if conditions for loop continuation are met */
 int canContinueProcessing(const char *name, int i, int len, int *sIndex) {
     return isIndexWithinBounds(i, len) && !isSoundexComplete(*sIndex);
 }
 
-// Function to process characters and generate Soundex code
+/* Function to process characters and generate Soundex code */
 void processSoundex(const char *name, char *soundex, int *sIndex, int len) {
     int i = 1;  // Start from the second character of the input
 
     while (canContinueProcessing(name, i, len, sIndex)) {
         char code = getSoundexCode(name[i]);
-        addToSoundex(soundex, code, sIndex);  // Add valid code to Soundex
-        i++;  // Increment index
+        addToSoundex(soundex, code, sIndex);  
+        i++; 
     }
 }
 
 
-// Function to generate the Soundex code
+/* Function to generate the Soundex code */
 void generateSoundex(const char *name, char *soundex) {
     int len = strlen(name);
-    int sIndex = 0;  // Index to keep track of Soundex code position
+    int sIndex = 0;  
 
-    initializeSoundex(name, soundex, &sIndex);  // Initialize Soundex with the first character
+    initializeSoundex(name, soundex, &sIndex);  
 
-    processSoundex(name, soundex, &sIndex, len);  // Process the characters and generate Soundex code
+    processSoundex(name, soundex, &sIndex, len);  /* Process the characters and generate Soundex code */
 
-    padSoundex(soundex, &sIndex);  // Pad with '0's to make it of length 4
+    padSoundex(soundex, &sIndex);  /* Pad with '0's to make it of length 4 */
 }
 
 #endif // SOUNDEX_H
