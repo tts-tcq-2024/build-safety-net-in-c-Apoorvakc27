@@ -14,14 +14,34 @@ TEST(SoudexTestsuite, NumbersWithCharacters) {
   EXPECT_STREQ(soundex,"1200");
   
 }
-
 TEST(SoudexTestsuite, NumbersWithLongCharacters) {
-
   char soundex[5];
   generateSoundex("APOO27", soundex);
   EXPECT_STREQ(soundex,"A100");
   
 }
+
+TEST(SoudexTestsuite, AllDigits) {
+  char soundex[5];
+  generateSoundex("63619156", soundex);
+  EXPECT_STREQ(soundex,"6000");
+  
+}
+
+TEST(SoudexTestsuite, AllSmallCharacters) {
+  char soundex[5];
+  generateSoundex("apoorva", soundex);
+  EXPECT_STREQ(soundex,"A100");
+  
+}
+TEST(SoudexTestsuite, AllSmallCharacters) {
+  char soundex[5];
+  generateSoundex("q@!18", soundex);
+  EXPECT_STREQ(soundex,"Q000");
+  
+}
+
+
 
 
 
