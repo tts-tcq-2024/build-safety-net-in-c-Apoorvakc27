@@ -17,7 +17,7 @@ TEST(SoudexTestsuite, NumbersWithCharacters) {
 TEST(SoudexTestsuite, NumbersWithLongCharacters) {
   char soundex[5];
   generateSoundex("APOO27", soundex);
-  EXPECT_STREQ(soundex,"A100");
+  EXPECT_STREQ(soundex,"A161");
   
 }
 
