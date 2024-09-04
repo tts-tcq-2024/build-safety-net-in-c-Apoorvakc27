@@ -17,7 +17,7 @@ TEST(SoudexTestsuite, NumbersWithCharacters) {
 TEST(SoudexTestsuite, NumbersWithLongCharacters) {
   char soundex[5];
   generateSoundex("APOO27", soundex);
-  EXPECT_STREQ(soundex,"A161");
+  EXPECT_STREQ(soundex,"A100");
   
 }
 
@@ -31,7 +31,7 @@ TEST(SoudexTestsuite, AllDigits) {
 TEST(SoudexTestsuite, AllSmallCharacters) {
   char soundex[5];
   generateSoundex("apoorva", soundex);
-  EXPECT_STREQ(soundex,"A100");
+  EXPECT_STREQ(soundex,"A161");
   
 }
 TEST(SoudexTestsuite, SpecialCharactersWithDigits) {
