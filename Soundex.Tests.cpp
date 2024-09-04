@@ -34,7 +34,7 @@ TEST(SoudexTestsuite, AllSmallCharacters) {
   EXPECT_STREQ(soundex,"A100");
   
 }
-TEST(SoudexTestsuite, AllSmallCharacters) {
+TEST(SoudexTestsuite, SpecialCharactersWithDigits) {
   char soundex[5];
   generateSoundex("q@!18", soundex);
   EXPECT_STREQ(soundex,"Q000");
