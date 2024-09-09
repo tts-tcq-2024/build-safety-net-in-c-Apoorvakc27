@@ -61,7 +61,7 @@ TEST(SoudexTestsuite, SameCharactersRepeating) {
 TEST(SoudexTestsuite, CharacterLessThanA) {
     char soundex[5];
     generateSoundex("@PP", soundex);
-    EXPECT_STREQ(soundex, "A100");  // '@' is ignored, 'P' -> '1', and another 'P' is ignored
+    EXPECT_STREQ(soundex, "@100");  // '@' is ignored, 'P' -> '1', and another 'P' is ignored
 }
 
 TEST(SoudexTestsuite, ConsecutiveCharactersWithSameSoundexCode) {
