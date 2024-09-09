@@ -16,42 +16,42 @@ TEST(SoudexTestsuite, IgnoresNumbersAndEncodesRemainingCharacters) {
   
 }
 
-TEST(SoudexTestsuite, NumbersWithLongCharacters) {
+TEST(SoudexTestsuite, HandlesRepeatedLettersAndDigits) {
   char soundex[5];
   generateSoundex("APOO27", soundex);
   EXPECT_STREQ(soundex,"A100");
   
 }
 
-TEST(SoudexTestsuite, AllDigits) {
+TEST(SoudexTestsuite, ReturnsZerosForDigitOnlyInput) {
   char soundex[5];
   generateSoundex("63619156", soundex);
   EXPECT_STREQ(soundex,"6000");
   
 }
 
-TEST(SoudexTestsuite, AllSmallCharacters) {
+TEST(SoudexTestsuite, ConvertsLowercaseToUppercaseAndEncodes) {
   char soundex[5];
   generateSoundex("apoorva", soundex);
   EXPECT_STREQ(soundex,"A161");
   
 }
 
-TEST(SoudexTestsuite, SpecialCharactersWithDigits) {
+TEST(SoudexTestsuite, IgnoresSpecialCharactersAndDigits) {
   char soundex[5];
-  generateSoundex("q@!18", soundex);
+  generateSoundex("q@!18A", soundex);
   EXPECT_STREQ(soundex,"Q000");
   
 }
 
-TEST(SoudexTestsuite, LastCharacters) {
+TEST(SoudexTestsuite, EncodesMixedCaseAndHandlesDuplicates) {
   char soundex[5];
   generateSoundex("zXPMZjS", soundex);
   EXPECT_STREQ(soundex,"Z215");
   
 }
 
-TEST(SoudexTestsuite, SameCharactersRepeating) {
+TEST(SoudexTestsuite, EncodesFirstCharacterAndIgnoresDuplicates) {
   char soundex[5];
   generateSoundex("FFFFF", soundex);
   EXPECT_STREQ(soundex,"F100");
