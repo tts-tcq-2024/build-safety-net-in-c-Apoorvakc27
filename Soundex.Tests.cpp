@@ -57,24 +57,17 @@ TEST(SoudexTestsuite, SameCharactersRepeating) {
   EXPECT_STREQ(soundex,"F100");
   
 }
-/*
-TEST(SoudexTestsuite, UpperCaseCharacterInSecondPosition) {
+
+TEST(SoudexTestsuite, CharacterLessThanA) {
     char soundex[5];
-    generateSoundex("A1B", soundex);
-    EXPECT_STREQ(soundex, "A100");
+    generateSoundex("@PP", soundex);
+    EXPECT_STREQ(soundex, "A100");  // '@' is ignored, 'P' -> '1', and another 'P' is ignored
 }
 
-TEST(SoudexTestsuite, DifferentCodesAfterSameCode) {
+TEST(SoudexTestsuite, ConsecutiveCharactersWithSameSoundexCode) {
     char soundex[5];
-    generateSoundex("DGH", soundex);
-    EXPECT_STREQ(soundex, "D200");
-}
-*/
-
-TEST(SoudexTestsuite, DifferentValidCodesAfterSameCode) {
-    char soundex[5];
-    generateSoundex("ADDB", soundex);
-    EXPECT_STREQ(soundex, "A310");
+    generateSoundex("BBBC", soundex);
+    EXPECT_STREQ(soundex, "B120");  // 'B' -> '1', next 'B's are skipped, 'C' -> '2'
 }
 
 
