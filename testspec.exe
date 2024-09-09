@@ -1,1 +1,89 @@
 
+Soundex Algorithm : The Soundex algorithm encodes a string into a code.
+The Algorithm steps are:
+1. Convert the first letter of the name to uppercase.
+2. Replace subsequent letters with digits based on a lookup table.
+3. Remove duplicates of the same digit.
+4. Append zeros because the code is of length 4.
+
+Public Interface : void generateSoundex(const char *name, char *soundex);
+Generates a Soundex code for the given input string name and stores the result in soundex.
+
+Test Specifications:
+
+Unit Testing:
+Code Coverage: All branches of the "generateSoundex" function are tested, including the conversion of characters, handling of non-alphabetic characters, and padding of the final code.
+
+Components:
+Function: generateSoundex
+Supporting Functions: getSoundexCode, isUpperCaseLetter, isSuoundxCode, addToSoundex, initializeSoundex, padSoundex, isSoundexComplete, isIndexWithinBounds, canContinueProcessing, processSoundex
+
+Verification:
+Expected Output: Verify that the output matches the expected Soundex code for each test case.
+Test Coverage: Ensure that all code branches, including those for non-alphabetic characters and digit handling, are Covered.
+
+
+Test Cases:
+1. Test Case Name: ReplacesConsonantsWithAppropriateDigits
+Scenario: Single character padding
+Steps:
+Given "AX" as input, then "A200" is expected.
+Requirement Specifications:
+The function should convert a single letter to a digit (based on the lookup table) and pad with zeros until the length reaches 4.
+
+2. Test Case Name: IgnoresNumbersAndEncodesRemainingCharacters
+Scenario: Numbers and Letters
+Steps:
+Given "17AK" as input, then "1200" is expected.
+Requirement Specifications:
+The function should ignore non-alphabetic characters (numbers) and encode the alphabetic characters according to the Soundex mapping.
+
+3. Test Case Name: HandlesRepeatedLettersAndDigits
+Scenario: Repeated Letters
+Steps:
+Given "APOO27" as input, then "A100" is expected.
+Requirement Specifications:
+The function should encode distinct consonants and ignore repeated letters, while ignoring non-alphabetic characters.
+
+4. Test Case Name: ReturnsZerosForDigitOnlyInput
+Scenario: Digit-Only Input
+Steps:
+Given "63619156" as input, then "6000" is expected.
+Requirement Specifications:
+The function should keep the first letter or number as is and return a code consisting of zeros if the input contains only digits.
+
+5. Test Case Name: ConvertsLowercaseToUppercaseAndEncodes
+Scenario: Lowercase Conversion
+Steps:
+Given "apoorva" as input, then "A161" is expected.
+Requirement Specifications:
+The function should convert all lowercase letters to uppercase. Only the first 4 letters should be considered; the rest should be ignored.
+
+6. Test Case Name: IgnoresSpecialCharactersAndDigits
+Scenario: Special Characters and Digits
+Steps:
+Given "q@!18A" as input, then "Q000" is expected.
+Requirement Specifications:
+The function should replace special characters and digits with '0', encoding only alphabetic characters if they are within the length of 4
+
+7. Test Case Name: EncodesMixedCaseAndHandlesDuplicates
+Scenario: upper and lower Case with repitative as Input
+Steps:
+Given "zXPMZjS" as input, then "Z215" is expected.
+Requirement Specifications:
+The function should process all type of letters, encode them correctly, and handle duplicate letters by ignoring subsequent occurrences.
+
+8. Test Case Name: EncodesFirstCharacterAndIgnoresDuplicates
+Scenario: Repitative Letters
+Steps:
+Given "FFFFF" as input, then "F100" is expected.
+Requirement Specifications:
+The function should encode the first character and ignore subsequent duplicates, padding the code as zero.
+
+
+
+
+
+
+
+
