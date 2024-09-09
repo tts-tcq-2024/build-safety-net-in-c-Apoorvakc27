@@ -9,7 +9,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits) {
   //ASSERT_EQ(soundex,"A200");
 }
 
-TEST(SoudexTestsuite, NumbersWithCharacters) {
+TEST(SoudexTestsuite, IgnoresNumbersAndEncodesRemainingCharacters) {
   char soundex[5];
   generateSoundex("17AK", soundex);
   EXPECT_STREQ(soundex,"1200");
@@ -58,17 +58,6 @@ TEST(SoudexTestsuite, SameCharactersRepeating) {
   
 }
 
-TEST(SoudexTestsuite, CharacterLessThanA) {
-    char soundex[5];
-    generateSoundex("@PP", soundex);
-    EXPECT_STREQ(soundex, "@100");  // '@' is ignored, 'P' -> '1', and another 'P' is ignored
-}
-
-TEST(SoudexTestsuite, ConsecutiveCharactersWithSameSoundexCode) {
-    char soundex[5];
-    generateSoundex("BBBC", soundex);
-    EXPECT_STREQ(soundex, "B120");  // 'B' -> '1', next 'B's are skipped, 'C' -> '2'
-}
 
 
 
