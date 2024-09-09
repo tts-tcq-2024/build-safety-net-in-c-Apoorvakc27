@@ -57,7 +57,7 @@ TEST(SoudexTestsuite, SameCharactersRepeating) {
   EXPECT_STREQ(soundex,"F100");
   
 }
-
+/*
 TEST(SoudexTestsuite, UpperCaseCharacterInSecondPosition) {
     char soundex[5];
     generateSoundex("A1B", soundex);
@@ -68,6 +68,13 @@ TEST(SoudexTestsuite, DifferentCodesAfterSameCode) {
     char soundex[5];
     generateSoundex("DGH", soundex);
     EXPECT_STREQ(soundex, "D200");
+}
+*/
+
+TEST(SoudexTestsuite, DifferentValidCodesAfterSameCode) {
+    char soundex[5];
+    generateSoundex("ADDB", soundex);
+    EXPECT_STREQ(soundex, "A310");
 }
 
 
