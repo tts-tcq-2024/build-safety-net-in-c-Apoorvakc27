@@ -12,11 +12,13 @@ Generates a Soundex code for the given input string name and stores the result i
 Test Specifications:
 
 Unit Testing:
-Code Coverage: All branches of the "generateSoundex" function are tested, including the conversion of characters, handling of non-alphabetic characters, and padding of the final code.
+Code Coverage: All branches of the "generateSoundex" function are tested, including the conversion of characters, 
+handling of non-alphabetic characters, and padding of the final code.
 
 Components:
 Function: generateSoundex
-Supporting Functions: getSoundexCode, isUpperCaseLetter, isSuoundxCode, addToSoundex, initializeSoundex, padSoundex, isSoundexComplete, isIndexWithinBounds, canContinueProcessing, processSoundex
+Supporting Functions: getSoundexCode, isUpperCaseLetter, isSuoundxCode, addToSoundex, initializeSoundex, 
+padSoundex, isSoundexComplete, isIndexWithinBounds, canContinueProcessing, processSoundex
 
 Verification:
 Expected Output: Verify that the output matches the expected Soundex code for each test case.
