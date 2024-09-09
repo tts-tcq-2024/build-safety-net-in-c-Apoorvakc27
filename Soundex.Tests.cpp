@@ -58,6 +58,18 @@ TEST(SoudexTestsuite, EncodesFirstCharacterAndIgnoresDuplicates) {
   
 }
 
+TEST(SoudexTestsuite, HandlesNonAlphabeticCharactersInUpperCaseCheck) {
+    char soundex[5];
+    generateSoundex("abc123!@#", soundex);
+    EXPECT_STREQ(soundex, "A000");  
+}
+
+TEST(SoudexTestsuite, HandlesDistinctConsonantsCorrectly) {
+    char soundex[5];
+    generateSoundex("ABAC", soundex);
+    EXPECT_STREQ(soundex, "A120");  
+}
+
 
 
 
