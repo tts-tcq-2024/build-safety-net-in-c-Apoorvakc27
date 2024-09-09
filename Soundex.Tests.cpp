@@ -8,12 +8,14 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits) {
   EXPECT_STREQ(soundex,"A200");
   //ASSERT_EQ(soundex,"A200");
 }
+
 TEST(SoudexTestsuite, NumbersWithCharacters) {
   char soundex[5];
   generateSoundex("17AK", soundex);
   EXPECT_STREQ(soundex,"1200");
   
 }
+
 TEST(SoudexTestsuite, NumbersWithLongCharacters) {
   char soundex[5];
   generateSoundex("APOO27", soundex);
@@ -34,6 +36,7 @@ TEST(SoudexTestsuite, AllSmallCharacters) {
   EXPECT_STREQ(soundex,"A161");
   
 }
+
 TEST(SoudexTestsuite, SpecialCharactersWithDigits) {
   char soundex[5];
   generateSoundex("q@!18", soundex);
@@ -47,11 +50,24 @@ TEST(SoudexTestsuite, LastCharacters) {
   EXPECT_STREQ(soundex,"Z215");
   
 }
+
 TEST(SoudexTestsuite, SameCharactersRepeating) {
   char soundex[5];
   generateSoundex("FFFFF", soundex);
   EXPECT_STREQ(soundex,"F100");
   
+}
+
+TEST(SoudexTestsuite, UpperCaseCharacterInSecondPosition) {
+    char soundex[5];
+    generateSoundex("A1B", soundex);
+    EXPECT_STREQ(soundex, "A100");
+}
+
+TEST(SoudexTestsuite, DifferentCodesAfterSameCode) {
+    char soundex[5];
+    generateSoundex("DGH", soundex);
+    EXPECT_STREQ(soundex, "D200");
 }
 
 
